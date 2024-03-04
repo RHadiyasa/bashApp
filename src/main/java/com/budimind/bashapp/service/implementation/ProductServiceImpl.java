@@ -27,9 +27,18 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new ResourceNotFoundException("Product with " + id + " is not found!"));
     }
     public ProductResponse createProduct(CreateProductRequest createProductRequest) {
-        createProductRequest.setImage(UUID.randomUUID().toString());
-        return null;
+
+        Product product = new Product();
+        product.setId(UUID.randomUUID().toString());
+        product.setName(createProductRequest.getName());
+        product.setPrice(createProductRequest.getPrice());
+        product.setDescription(createProductRequest.getDescription());
+        product.setImage(createProductRequest.getImage());
+        productRepository.save(product);
+
+        return toProductResponse(product);
     }
+
 
     public Product editProduct(Product product) {
         return productRepository.save(product);
