@@ -1,8 +1,6 @@
 package com.budimind.bashapp.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +14,9 @@ import java.io.Serializable;
 @Table(name = "categories")
 public class Category implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+
+    @Column(name = "category_name")
     private String categoryName;
 }
