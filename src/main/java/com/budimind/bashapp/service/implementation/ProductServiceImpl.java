@@ -1,5 +1,7 @@
 package com.budimind.bashapp.service.implementation;
 
+import com.budimind.bashapp.dto.request.CreateProductRequest;
+import com.budimind.bashapp.dto.response.ProductResponse;
 import com.budimind.bashapp.entity.Product;
 import com.budimind.bashapp.exception.ResourceNotFoundException;
 import com.budimind.bashapp.repository.ProductRepository;
@@ -20,31 +22,40 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository = productRepository;
     }
 
-    public Product findProductById(String id){
+    public Product findProductById(String id) {
         return productRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Product with " + id + " is not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product with " + id + " is not found!"));
+    }
+    public ProductResponse createProduct(CreateProductRequest createProductRequest) {
+        createProductRequest.setImage(UUID.randomUUID().toString());
+        return null;
     }
 
-    public Product createProduct(Product product){
-        product.setImage(UUID.randomUUID().toString());
+    public Product editProduct(Product product) {
         return productRepository.save(product);
     }
 
-    public Product editProduct(Product product){
-        return productRepository.save(product);
-    }
-
-    public Product editProductImage(String id, String image){
+    public Product editProductImage(String id, String image) {
         Product product = findProductById(id);
         product.setImage(image);
         return productRepository.save(product);
     }
 
-    public List<Product> findAllProduct(){
+    public List<Product> findAllProduct() {
         return productRepository.findAll();
     }
 
-    public void deleteProduct(String id){
+    private ProductResponse toProductResponse(Product product) {
+        return ProductResponse.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .price(product.getPrice())
+                .description(product.getDescription())
+                .image(product.getImage())
+                .build();
+    }
+
+    public void deleteProduct(String id) {
         productRepository.deleteById(id);
     }
 }

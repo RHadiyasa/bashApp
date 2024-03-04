@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ManyToAny;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 @Data
 @AllArgsConstructor
@@ -24,6 +24,6 @@ public class Product {
     @JoinColumn
     @ManyToOne
     private Category category;
-    private BigDecimal price;
-    private Integer stock;
+    private BigInteger price;
+    private Double weight;
 }

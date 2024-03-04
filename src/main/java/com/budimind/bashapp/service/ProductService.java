@@ -1,5 +1,7 @@
 package com.budimind.bashapp.service;
 
+import com.budimind.bashapp.dto.request.CreateProductRequest;
+import com.budimind.bashapp.dto.response.ProductResponse;
 import com.budimind.bashapp.entity.Product;
 
 import java.util.List;
@@ -7,7 +9,7 @@ import java.util.List;
 public interface ProductService {
 
     Product findProductById(String id);
-    Product createProduct(Product product);
+    ProductResponse createProduct(CreateProductRequest createProductRequest);
 
     Product editProduct(Product product);
 
