@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -13,17 +14,17 @@ import java.math.BigInteger;
 @NoArgsConstructor
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private String name;
+    private Double price;
     private String description;
     private String image;
 
     @JoinColumn
     @ManyToOne
     private Category category;
-    private BigInteger price;
-    private Double weight;
 }

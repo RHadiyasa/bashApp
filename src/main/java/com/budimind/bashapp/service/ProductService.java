@@ -10,7 +10,6 @@ public interface ProductService {
 
     Product findProductById(String id);
     ProductResponse createProduct(CreateProductRequest createProductRequest);
-
     Product editProduct(Product product);
 
     Product editProductImage(String id, String image);
