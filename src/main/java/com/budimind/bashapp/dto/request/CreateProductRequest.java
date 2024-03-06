@@ -29,5 +29,5 @@ public class CreateProductRequest {
     @Size(max = 255)
     private String image;
 
-    private String categoryId;
+    private String categoryName;
 }

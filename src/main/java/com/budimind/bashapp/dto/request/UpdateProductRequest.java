@@ -1,30 +1,36 @@
-package com.budimind.bashapp.dto.response;
+package com.budimind.bashapp.dto.request;
 
-
-import com.budimind.bashapp.dto.request.CreateCategoryRequest;
-import com.budimind.bashapp.entity.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.NamedAttributeNode;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.jdbc.datasource.init.CannotReadScriptException;
-
-import java.math.BigInteger;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductResponse {
-    private String id;
-    private String name;
-    private Double price;
-    private String description;
-    private String image;
+public class UpdateProductRequest {
 
     @JsonIgnore
+    @NotNull
+    private String id;
+    @NotBlank
+    @Size(max = 255)
+    private String name;
+    @NotBlank
+    @Size(max = 255)
+    private Double price;
+    @NotBlank
+    @Size(max = 255)
+    private String description;
+    @NotBlank
+    @Size(max = 255)
+    private String image;
+
     private String categoryId;
     private String categoryName;
 }

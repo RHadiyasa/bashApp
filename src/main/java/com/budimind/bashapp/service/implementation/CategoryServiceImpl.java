@@ -3,11 +3,13 @@ package com.budimind.bashapp.service.implementation;
 import com.budimind.bashapp.dto.request.CreateCategoryRequest;
 import com.budimind.bashapp.dto.response.CategoryResponse;
 import com.budimind.bashapp.entity.Category;
+import com.budimind.bashapp.exception.BadRequestException;
 import com.budimind.bashapp.repository.CategoryRepository;
 import com.budimind.bashapp.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -32,6 +34,15 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     public CategoryResponse createCategory(CreateCategoryRequest createCategoryRequest){
+
+        if (!StringUtils.hasText(createCategoryRequest.getCategoryName())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Category name cannot be empty");
+        }
+
+        if (categoryRepository.existsByCategoryNameIgnoreCase(createCategoryRequest.getCategoryName())){
+            throw new BadRequestException("Category was exists");
+        }
+
         Category category = new Category();
         category.setId(UUID.randomUUID().toString());
         category.setCategoryName(createCategoryRequest.getCategoryName());
