@@ -9,9 +9,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class WebResponse<T>{
-    private T data;
-    private Integer statusCode;
-    private String errors;
-    private String message;
+public class UserResponse {
+
+    private String name;
+    private String address;
+    private String email;
+    private String phone;
+    private String role;
+    private boolean isActive;
+
 }

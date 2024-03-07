@@ -5,13 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class WebResponse<T>{
-    private T data;
-    private Integer statusCode;
-    private String errors;
-    private String message;
+public class JwtClaims {
+    private String userAccountId;
+    private List<String> roles;
 }

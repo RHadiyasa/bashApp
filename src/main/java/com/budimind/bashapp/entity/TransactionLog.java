@@ -29,7 +29,7 @@ public class TransactionLog implements Serializable {
     @ManyToOne
     private Transaction transactionId;
 
-    @JoinColumn
     @ManyToOne
+    @JoinColumn(name = "username", referencedColumnName = "username")
     private User user;
 }

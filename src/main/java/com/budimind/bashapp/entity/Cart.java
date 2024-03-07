@@ -27,8 +27,8 @@ public class Cart implements Serializable {
     @ManyToOne
     private Product product;
 
-    @JoinColumn
     @ManyToOne
+    @JoinColumn(name = "username", referencedColumnName = "username")
     private User user;
 
     @Temporal(TemporalType.TIMESTAMP)

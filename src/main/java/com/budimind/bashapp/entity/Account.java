@@ -1,13 +1,9 @@
 package com.budimind.bashapp.entity;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,34 +12,24 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "users")
-@Builder
-public class User implements UserDetails{
-
+@Table(name = "account")
+public class Account implements UserDetails {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     @Column(name = "username", nullable = false, unique = true)
     private String username;
     @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "name")
-    private String name;
 
-    @Column(name = "address")
-    private String address;
+    @Column(name = "isActive")
+    private Boolean isActive;
 
-    @Column(name = "email")
-    private String email;
-    @Column(name = "phone")
-    private String phone;
-
-    @Column(name = "role")
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> role;
-    @Column(name = "is_active")
-    private boolean isActive;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

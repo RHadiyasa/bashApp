@@ -1,6 +1,6 @@
 package com.budimind.bashapp.entity;
 
-import com.budimind.bashapp.model.TransactionStatus;
+import com.budimind.bashapp.constant.TransactionStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,8 +29,8 @@ public class Transaction implements Serializable {
     private BigInteger shippingCost;
     private BigInteger totalTransaction;
 
-    @JoinColumn
     @ManyToOne
+    @JoinColumn(name = "username", referencedColumnName = "username")
     private User user;
 
     @Enumerated(EnumType.STRING)
